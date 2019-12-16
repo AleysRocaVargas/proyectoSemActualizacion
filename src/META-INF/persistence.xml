@@ -3,7 +3,6 @@
   <persistence-unit name="ActualizacionWampPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>actualizacionwamp.entity.Acudientes</class>
-    <class>actualizacionwamp.entity.Usuarios</class>
     <class>actualizacionwamp.entity.Notificacion</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/wamp?zeroDateTimeBehavior=convertToNull"/>

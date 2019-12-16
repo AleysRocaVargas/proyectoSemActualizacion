@@ -6,7 +6,8 @@
 package actualizacionwamp;
 
 
-import actualizacionwamp.entity.Usuarios;
+import actualizacionwamp.entity.Datas;
+import actualizacionwamp.entity.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -33,21 +34,15 @@ public class principal {
 //        vp.setVisible(true);
 //        vp.setResizable(false);
 //        vp.setLocationRelativeTo(null);
-//    String s=httpclient.sendPOST_IniciarSesion("arleysroca11.1@gmail.com", "1234");
-//        JsonParser parser=new JsonParser();
-//        JsonArray jsonArr=parser.parse(s).getAsJsonArray();
-//        
-       String s = httpclient.sendPOST_IniciarSesion("arleysroca11.1@gmaill.com", "1234");
-        System.out.println(s);
-        JsonParser parser=new JsonParser();
-        JsonObject jsonArr=parser.parse(s).getAsJsonObject();
-       Gson gson = new Gson();
-        Usuarios users = gson.fromJson(jsonArr,Usuarios.class);
-        System.out.println("users: "+users.toString());
-        System.out.println("ES:"+users.getNombre());
-//        
-//        System.out.println("list USuarios"+users);
-//       
+        
+
+     Usuario s = httpclient.sendPOST_IniciarSesion("arleysroca11.1@gmail.com", "1234");
+     
+     httpclient.sendPOST_RegistrAcudienteUsuario("3", "arleysroca11.1@gmail.com");
+      httpclient.sendPOST_RegistrAcudienteUsuario("3", "arleysroca11.1@gmail.com");
+       httpclient.sendPOST_RegistrAcudienteUsuario("3", "arleysroca11.1@gmail.com");
+       
+        System.out.println("obtener acud: "+httpclient.sendPOST_ObtenerAcudienteUsuario("3"));
        
     }
     

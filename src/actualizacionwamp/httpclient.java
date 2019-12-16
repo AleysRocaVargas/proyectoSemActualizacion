@@ -6,6 +6,13 @@
 package actualizacionwamp;
 
 
+import actualizacionwamp.entity.Acudientes;
+import actualizacionwamp.entity.Datas;
+import actualizacionwamp.entity.Usuario;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +34,35 @@ import org.apache.http.util.EntityUtils;
  * @author Arleys
  */
 public class httpclient{
+
+    private static Usuario recuperarUsuario(String result) {
+        System.out.println("Result: "+result);
+        String resultSubS=result.substring(12,result.length()-1);
+        Gson gson=new Gson();            
+         System.out.println("sub: "+resultSubS);         
+         JsonParser parser = new JsonParser();
+         JsonObject gsonObj = parser.parse(resultSubS).getAsJsonObject();
+         
+         int ide = gsonObj.get("ID").getAsInt();
+         String name = gsonObj.get("NOMBRE").getAsString();
+         String email =gsonObj.get("EMAIL").getAsString();
+         String pass=gsonObj.get("PASSWORD").getAsString();
+         
+         System.out.println("jsonObject: "+ide+ " "+name);
+//         
+    Usuario R=new Usuario(ide, name, email, pass, null, null);
+    return R;
+    }
+
+    private static List<Acudientes> recuperarListaAcudiente(String result) {
+        List<Acudientes> respuesta;
+         JsonParser parser = new JsonParser();
+         String resultSubS=result.substring(14,result.length()-1);
+        // Obtain Array
+        JsonArray gsonArr = parser.parse(resultSubS).getAsJsonArray();
+        
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     public httpclient() {
 
     }
@@ -114,7 +150,7 @@ String url="https://notificacionesapi.000webhostapp.com/api/login";
 
         return result;
     }
-     public static String sendPOST_IniciarSesion( String email,String password) throws IOException {
+     public static Usuario sendPOST_IniciarSesion( String email,String password) throws IOException {
 String url="https://notificacionesapi.000webhostapp.com/api/login/iniciar";
         String result = "";
         HttpPost post = new HttpPost(url);
@@ -134,9 +170,13 @@ String url="https://notificacionesapi.000webhostapp.com/api/login/iniciar";
             result = EntityUtils.toString(response.getEntity());
         }
 
-        return result;
+        Usuario respuesta=recuperarUsuario(result);
+        return respuesta;
     }
-     public static String sendPOST_RegistrAcudienteUsuario( String nombre,String email) throws IOException {
+     
+     
+     
+     public static String sendPOST_RegistrAcudienteUsuario( String nombreID,String email) throws IOException {
     String url="https://notificacionesapi.000webhostapp.com/api/acudientes";
         String result = "";
         HttpPost post = new HttpPost(url);
@@ -144,7 +184,7 @@ String url="https://notificacionesapi.000webhostapp.com/api/login/iniciar";
         // add request parameters or form parameters
         List <NameValuePair> urlParameters;
         urlParameters = new ArrayList<>();
-        urlParameters.add(new BasicNameValuePair("nombre", nombre));
+        urlParameters.add(new BasicNameValuePair("nombre", nombreID));
         urlParameters.add(new BasicNameValuePair("email", email));
        
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
@@ -175,7 +215,7 @@ String url="https://notificacionesapi.000webhostapp.com/api/acudientes/usuario";
 
             result = EntityUtils.toString(response.getEntity());
         }
-
+        List<Acudientes> g=recuperarListaAcudiente(result);
         return result;
     }
      public static String sendPOST_EnviarNotificacion( String cantEmail,List<String> email) throws IOException {

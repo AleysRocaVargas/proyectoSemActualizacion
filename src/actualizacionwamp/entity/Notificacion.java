@@ -1,66 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package actualizacionwamp.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
+
 
 /**
  *
  * @author Arleys
  */
-@Entity
-@Table(name = "notificacion")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Notificacion.findAll", query = "SELECT n FROM Notificacion n")
-    , @NamedQuery(name = "Notificacion.findById", query = "SELECT n FROM Notificacion n WHERE n.id = :id")
-    , @NamedQuery(name = "Notificacion.findByLatitud", query = "SELECT n FROM Notificacion n WHERE n.latitud = :latitud")
-    , @NamedQuery(name = "Notificacion.findByLongitud", query = "SELECT n FROM Notificacion n WHERE n.longitud = :longitud")
-    , @NamedQuery(name = "Notificacion.findByCreatedAt", query = "SELECT n FROM Notificacion n WHERE n.createdAt = :createdAt")
-    , @NamedQuery(name = "Notificacion.findByUpdatedAt", query = "SELECT n FROM Notificacion n WHERE n.updatedAt = :updatedAt")})
 public class Notificacion implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ID")
     private Integer id;
-    @Basic(optional = false)
-    @Column(name = "LATITUD")
+ 
     private double latitud;
-    @Basic(optional = false)
-    @Column(name = "LONGITUD")
+ 
     private double longitud;
-    @Basic(optional = false)
-    @Column(name = "CREATED_AT")
-    @Temporal(TemporalType.TIMESTAMP)
+
     private Date createdAt;
-    @Basic(optional = false)
-    @Column(name = "UPDATED_AT")
-    @Temporal(TemporalType.TIMESTAMP)
+
     private Date updatedAt;
-    @JoinColumn(name = "REMITENTE_ID", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private Usuarios remitenteId;
+    
+    private Usuario remitenteId;
+
 
     public Notificacion() {
     }
@@ -117,11 +79,11 @@ public class Notificacion implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public Usuarios getRemitenteId() {
+    public Usuario getRemitenteId() {
         return remitenteId;
     }
 
-    public void setRemitenteId(Usuarios remitenteId) {
+    public void setRemitenteId(Usuario remitenteId) {
         this.remitenteId = remitenteId;
     }
 

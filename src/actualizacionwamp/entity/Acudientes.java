@@ -7,56 +7,24 @@ package actualizacionwamp.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
+
 
 /**
  *
  * @author Arleys
  */
-@Entity
-@Table(name = "acudientes")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Acudientes.findAll", query = "SELECT a FROM Acudientes a")
-    , @NamedQuery(name = "Acudientes.findById", query = "SELECT a FROM Acudientes a WHERE a.id = :id")
-    , @NamedQuery(name = "Acudientes.findByEmail", query = "SELECT a FROM Acudientes a WHERE a.email = :email")
-    , @NamedQuery(name = "Acudientes.findByCreatedAt", query = "SELECT a FROM Acudientes a WHERE a.createdAt = :createdAt")
-    , @NamedQuery(name = "Acudientes.findByUpdatedAt", query = "SELECT a FROM Acudientes a WHERE a.updatedAt = :updatedAt")})
+
 public class Acudientes implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ID")
     private Integer id;
-    @Basic(optional = false)
-    @Column(name = "EMAIL")
+
     private String email;
-    @Basic(optional = false)
-    @Column(name = "CREATED_AT")
-    @Temporal(TemporalType.TIMESTAMP)
+
     private Date createdAt;
-    @Basic(optional = false)
-    @Column(name = "UPDATED_AT")
-    @Temporal(TemporalType.TIMESTAMP)
+
     private Date updatedAt;
-    @JoinColumn(name = "ACUDIENTE_DE", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private Usuarios acudienteDe;
+   
+    private Usuario acudienteDe;
 
     public Acudientes() {
     }
@@ -104,11 +72,11 @@ public class Acudientes implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public Usuarios getAcudienteDe() {
+    public Usuario getAcudienteDe() {
         return acudienteDe;
     }
 
-    public void setAcudienteDe(Usuarios acudienteDe) {
+    public void setAcudienteDe(Usuario acudienteDe) {
         this.acudienteDe = acudienteDe;
     }
 
