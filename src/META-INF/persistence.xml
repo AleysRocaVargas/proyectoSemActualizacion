@@ -2,9 +2,9 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="ActualizacionWampPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>actuelizacionwamp.entity.Usuarios</class>
-    <class>actuelizacionwamp.entity.Notificacion</class>
-    <class>actuelizacionwamp.entity.Acudientes</class>
+    <class>actualizacionwamp.entity.Acudientes</class>
+    <class>actualizacionwamp.entity.Usuarios</class>
+    <class>actualizacionwamp.entity.Notificacion</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/wamp?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

@@ -5,7 +5,7 @@
  */
 package wamp.vistas;
 
-import actuelizacionwamp.httpclient;
+import actualizacionwamp.httpclient;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 
