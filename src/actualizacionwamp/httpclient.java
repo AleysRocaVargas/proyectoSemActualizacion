@@ -11,6 +11,7 @@ import actualizacionwamp.entity.Datas;
 import actualizacionwamp.entity.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.IOException;
@@ -55,13 +56,34 @@ public class httpclient{
     }
 
     private static List<Acudientes> recuperarListaAcudiente(String result) {
-        List<Acudientes> respuesta;
+        List<Acudientes> respuesta=new ArrayList<>();
          JsonParser parser = new JsonParser();
          String resultSubS=result.substring(14,result.length()-1);
         // Obtain Array
         JsonArray gsonArr = parser.parse(resultSubS).getAsJsonArray();
         
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (JsonElement obj : gsonArr) {
+
+            // Object of array
+            JsonObject gsonObj = obj.getAsJsonObject();
+
+            // Primitives elements of object
+            int id = gsonObj.get("EMAIL").getAsInt();
+            int acudeintede = gsonObj.get("ACUDIENTE_DE").getAsInt();
+            String email = gsonObj.get("EMAIL").getAsString();
+
+            // List of primitive elements
+            JsonArray demarcation = gsonObj.get("demarcation").getAsJsonArray();
+            List listDemarcation = new ArrayList();
+            
+
+            // Object Constructor
+            Acudientes acu = new Acudientes(id, email, acudeintede);
+            System.out.println(acu);
+            respuesta.add(acu);
+        }
+    
+        return respuesta;
     }
     public httpclient() {
 
@@ -215,7 +237,7 @@ String url="https://notificacionesapi.000webhostapp.com/api/acudientes/usuario";
 
             result = EntityUtils.toString(response.getEntity());
         }
-        List<Acudientes> g=recuperarListaAcudiente(result);
+        //List<Acudientes> g=recuperarListaAcudiente(result);
         return result;
     }
      public static String sendPOST_EnviarNotificacion( String cantEmail,List<String> email) throws IOException {

@@ -6,17 +6,8 @@
 package actualizacionwamp;
 
 
-import actualizacionwamp.entity.Datas;
 import actualizacionwamp.entity.Usuario;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import java.io.IOException;
-import wamp.vistas.VentanaPrincipal;
-import wamp.vistas.login;
-import java.lang.Object;
 
 /**
  *

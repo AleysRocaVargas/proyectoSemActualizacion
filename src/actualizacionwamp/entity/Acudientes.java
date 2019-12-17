@@ -24,7 +24,7 @@ public class Acudientes implements Serializable {
 
     private Date updatedAt;
    
-    private Usuario acudienteDe;
+    private int acudienteDe;
 
     public Acudientes() {
     }
@@ -33,7 +33,7 @@ public class Acudientes implements Serializable {
         this.id = id;
     }
 
-    public Acudientes(Integer id, String email, Date createdAt, Date updatedAt) {
+    public Acudientes(Integer id, String email,Integer acuduentede) {
         this.id = id;
         this.email = email;
         this.createdAt = createdAt;
@@ -72,20 +72,15 @@ public class Acudientes implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public Usuario getAcudienteDe() {
+    public int getAcudienteDe() {
         return acudienteDe;
     }
 
-    public void setAcudienteDe(Usuario acudienteDe) {
+    public void setAcudienteDe(int acudienteDe) {
         this.acudienteDe = acudienteDe;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
+   
 
     @Override
     public boolean equals(Object object) {
