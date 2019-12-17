@@ -55,8 +55,8 @@ public class httpclient{
     return R;
     }
 
-    private static List<Acudientes> recuperarListaAcudiente(String result) {
-        List<Acudientes> respuesta=new ArrayList<>();
+    private static ArrayList<Acudientes> recuperarListaAcudiente(String result) {
+        ArrayList<Acudientes> respuesta=new ArrayList<>();
          JsonParser parser = new JsonParser();
          String resultSubS=result.substring(14,result.length()-1);
         // Obtain Array
@@ -69,20 +69,21 @@ public class httpclient{
 
             // Primitives elements of object
             int id = gsonObj.get("EMAIL").getAsInt();
+            System.out.println("rec: ID"+id);
             int acudeintede = gsonObj.get("ACUDIENTE_DE").getAsInt();
             String email = gsonObj.get("EMAIL").getAsString();
+            System.out.println("email: rec: "+email);    
+                
 
-            // List of primitive elements
-            JsonArray demarcation = gsonObj.get("demarcation").getAsJsonArray();
-            List listDemarcation = new ArrayList();
-            
 
             // Object Constructor
             Acudientes acu = new Acudientes(id, email, acudeintede);
             System.out.println(acu);
-            respuesta.add(acu);
+            
+                    respuesta.add(acu);
+            System.out.println("respuesta: "+respuesta);
         }
-    
+        System.out.println("lista ACU_recuperar"+respuesta.size());
         return respuesta;
     }
     public httpclient() {
@@ -219,7 +220,8 @@ String url="https://notificacionesapi.000webhostapp.com/api/login/iniciar";
 
         return result;
     }
-     public static String sendPOST_ObtenerAcudienteUsuario( String usuarioId) throws IOException {
+     
+     public static ArrayList<Acudientes> sendPOST_ObtenerAcudienteUsuario( String usuarioId) throws IOException {
 String url="https://notificacionesapi.000webhostapp.com/api/acudientes/usuario";
         String result = "";
         HttpPost post = new HttpPost(url);
@@ -237,8 +239,8 @@ String url="https://notificacionesapi.000webhostapp.com/api/acudientes/usuario";
 
             result = EntityUtils.toString(response.getEntity());
         }
-        //List<Acudientes> g=recuperarListaAcudiente(result);
-        return result;
+        ArrayList<Acudientes> g=new ArrayList<>(recuperarListaAcudiente(result));
+        return g;
     }
      public static String sendPOST_EnviarNotificacion( String cantEmail,List<String> email) throws IOException {
 String url="https://notificacionesapi.000webhostapp.com/api/notificar";

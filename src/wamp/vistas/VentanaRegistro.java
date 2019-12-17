@@ -207,6 +207,9 @@ public class VentanaRegistro extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden");
         }
+        txt_email.setText("");
+        txt_nombre.setText("");
+        
     }//GEN-LAST:event_btn_regActionPerformed
 
     /**

@@ -5,6 +5,7 @@
  */
 package wamp.vistas;
 
+import actualizacionwamp.entity.Usuario;
 import actualizacionwamp.httpclient;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -163,12 +164,14 @@ public class login extends javax.swing.JFrame {
     String email=txt_email.getText();
     String pass= new String(txt_password.getPassword());
 
-    boolean flag=verificaUsuario(email,pass);
-        if(flag){
-            Home vH=new Home();
+    Usuario flag =verificaUsuario(email,pass);
+        if(flag!=null){
+            Home vH=new Home(flag);
+            vH.setResizable(false);
+            vH.setLocationRelativeTo(null);
             vH.setVisible(true);this.dispose();
         }else{
-            JOptionPane.showConfirmDialog(null, " Usuario o contraseña Inconrrecta");
+            JOptionPane.showMessageDialog(null, " Usuario o contraseña Inconrrecta");
         }        // TODO add your handling code here:
         
     }//GEN-LAST:event_btn_IngresarActionPerformed
@@ -226,16 +229,18 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JPasswordField txt_password;
     // End of variables declaration//GEN-END:variables
 
-    private boolean verificaUsuario(String email, String pass) {
-        boolean flag=true;
+    private Usuario verificaUsuario(String email, String pass) {
+        
+        
         try {
-            httpclient.sendPOST_IniciarSesion(email, pass);
-            JOptionPane.showMessageDialog(this, "Bienvenido");
+            Usuario actUsuario=httpclient.sendPOST_IniciarSesion(email, pass);
+            System.out.println("Actual: "+ actUsuario.getNOMBRE());
+            return actUsuario;
         } catch (IOException ex) {
             System.out.println("Error: "+ex.getMessage());
-            flag=false;
+            
             JOptionPane.showMessageDialog(this, "Error de conexión");
         }
-        return flag;
+        return null;
     }
 }

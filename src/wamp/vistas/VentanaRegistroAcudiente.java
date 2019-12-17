@@ -70,7 +70,7 @@ public class VentanaRegistroAcudiente extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setText("Nombre: ");
+        jLabel1.setText("Mi ID");
 
         txt_nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,7 +78,7 @@ public class VentanaRegistroAcudiente extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("E-mail:");
+        jLabel2.setText("E-mail (Acudiente):");
 
         btn_acept.setText("Aceptar");
         btn_acept.addActionListener(new java.awt.event.ActionListener() {
@@ -100,20 +100,25 @@ public class VentanaRegistroAcudiente extends javax.swing.JFrame {
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(backgroundLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(backgroundLayout.createSequentialGroup()
-                        .addComponent(btn_acept)
-                        .addGap(60, 60, 60)
-                        .addComponent(btn_cancel))
-                    .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txt_nombre)
-                        .addComponent(txt_email, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                        .addGap(77, 77, 77)
+                        .addComponent(jLabel1)
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(backgroundLayout.createSequentialGroup()
+                                .addGap(53, 53, 53)
+                                .addComponent(btn_acept)
+                                .addGap(60, 60, 60)
+                                .addComponent(btn_cancel))
+                            .addGroup(backgroundLayout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,7 +160,11 @@ public class VentanaRegistroAcudiente extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_nombreActionPerformed
 
     private void btn_aceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptActionPerformed
-    registrarAcudiente();        // TODO add your handling code here:
+    registrarAcudiente();
+    JOptionPane.showMessageDialog(this, "Has agregado a "+txt_email.getText()+" a tus acudientes");
+    txt_email.setText("");
+    txt_nombre.setText("");
+// TODO add your handling code here:
     }//GEN-LAST:event_btn_aceptActionPerformed
 
     private void btn_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelActionPerformed

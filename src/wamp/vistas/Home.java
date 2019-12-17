@@ -5,6 +5,8 @@
  */
 package wamp.vistas;
 
+import actualizacionwamp.entity.Acudientes;
+import actualizacionwamp.entity.Usuario;
 import actualizacionwamp.httpclient;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,14 +14,15 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Arleys
  */
 public class Home extends javax.swing.JFrame {
-public String uActual;    
-
+public Usuario uActual;    
+DefaultListModel modelo = new DefaultListModel();
     /**
      * Creates new form Home
      */
@@ -27,6 +30,16 @@ public String uActual;
 
     Home() {
      initComponents();
+     jList1.setModel(modelo);
+     
+    }
+
+    Home(Usuario flag) {
+        initComponents();
+        jList1.setModel(modelo);
+        this.uActual=flag;
+        lbl_usuarioActual.setText(uActual.getNOMBRE());
+       listarAcudientes(); 
     }
 
     /**
@@ -232,12 +245,15 @@ public String uActual;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_alerta_bradcastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alerta_bradcastActionPerformed
-        generarAlertaBroadcast("3");
+        String i=Integer.toString(uActual.getID());
+        generarAlertaBroadcast(i);
+        JOptionPane.showMessageDialog(this, "HAS GENERADO UNA ALERTA");
     }//GEN-LAST:event_btn_alerta_bradcastActionPerformed
 
     private void btn_alertaDirigidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alertaDirigidaActionPerformed
-        // TODO add your handling code here:
-        generarAlertaDirigida("3");
+       String i=Integer.toString(uActual.getID());
+       
+        generarAlertaDirigida(i);
     }//GEN-LAST:event_btn_alertaDirigidaActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
@@ -279,8 +295,9 @@ public String uActual;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                 
+                
             }
+           
         });
     }
 
@@ -315,13 +332,26 @@ public String uActual;
     }
 
     private void generarAlertaDirigida(String usuarioActual) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       String s=JOptionPane.showInputDialog(this,"Correo del destinatario");
+        JOptionPane.showMessageDialog(this, "Has Alertado a: "+s);
     }
 
-    private static void listarContactos(String usuarioActual) {
-        System.out.println("lista iniciada");
-        String nombre="-------";
-        
+    private void listarAcudientes(){
+    try {
+        String idActual;
+        System.out.println("Uactual id"+ uActual.getID());
+        idActual = Integer.toString(uActual.getID());
+        ArrayList<Acudientes> lista=new ArrayList<>(httpclient.sendPOST_ObtenerAcudienteUsuario(idActual));
+        System.out.println("ListaAcudiente: "+lista);
+        ArrayList listaNombres=new ArrayList();
+        for (Acudientes acudientes : lista) {
+            listaNombres.add(acudientes.getEmail());
+        }
+        modelo.addElement(listaNombres);
+    } catch (IOException ex) {
+        Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
     }
+        
+    } 
     
 }
