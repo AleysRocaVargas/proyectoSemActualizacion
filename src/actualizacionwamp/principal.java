@@ -25,6 +25,7 @@ public class principal {
         vp.setVisible(true);
         vp.setResizable(false);
         vp.setLocationRelativeTo(null);
+         
         
 
     
